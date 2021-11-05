@@ -1,8 +1,7 @@
-# fwb58atmakuri
+# db58atmakuri
 
-created this repo fro lab 10
+created this repo fro lab 11
 
-<https://fwb58atmakuri.herokuapp.com/>
+<https://db58atmakuri.herokuapp.com/>
 
-My resource name is Canteen
-Attribute are Item_name(String), Item_type(String),Item_price(number)
+
