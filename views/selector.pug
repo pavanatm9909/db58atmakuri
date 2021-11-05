@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    h1= title
+    p Welcom to #{title} js
+    br       
+    - var imageName= ["cake.jpg","puff.jpg","cock.png","cake1.jpg","friderice.jpeg"]            
+        -for(let i=0;i<3;i++){
+            - let r=Math.floor(Math.random()*5)
+                img(src= `/images/${imageName[r]}` alt="image", height="300", width="300")
+            -}

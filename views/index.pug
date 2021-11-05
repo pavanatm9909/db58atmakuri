@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+  p This lab gives how to use pug langunge
+  button(type='button',class='btn btn-success', onclick="update()") Prees Me
+  div(id='target') Display
+  script(type='text/javascript').
+    let client_count=0;
+    function update(){
+      client_count=client_count+1
+      document.getElementById('target').innerHTML=client_count
+    };
+  a(href='canteen') Canteen
+    
+    
