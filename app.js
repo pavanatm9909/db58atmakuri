@@ -6,13 +6,6 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 var Canteen = require("./models/canteen");
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var canteenRouter = require('./routes/canteen');
-var addmodsRouter = require('./routes/addmods');
-var selectorRouter = require('./routes/selector');
-
-var app = express();
 const connectionString = process.env.MONGO_CON
 mongoose = require('mongoose');
 mongoose.connect(connectionString,
@@ -61,6 +54,15 @@ if (reseed) {
   recreateDB();
 }
 
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+var canteenRouter = require('./routes/canteen');
+var addmodsRouter = require('./routes/addmods');
+var selectorRouter = require('./routes/selector');
+var resourceRouter = require('./routes/resource');
+
+var app = express();
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -76,6 +78,7 @@ app.use('/users', usersRouter);
 app.use('/canteen', canteenRouter);
 app.use('/addmods', addmodsRouter);
 app.use('/selector', selectorRouter);
+app.use('/', resourceRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
