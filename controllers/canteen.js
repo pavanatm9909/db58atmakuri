@@ -1,17 +1,25 @@
-var Canteen = require('../models/canteen'); 
- 
+var Canteen = require('../models/canteen');
+
 // List of all Canteens 
-exports.canteen_list = function(req, res) { 
-    res.send('NOT IMPLEMENTED: Canteen list'); 
-}; 
- 
+exports.canteen_l
+ist = function (req, res) {
+    res.send('NOT IMPLEMENTED: Canteen list');
+};
+
 // for a specific Canteen. 
-exports.canteen_detail = function(req, res) { 
-    res.send('NOT IMPLEMENTED: Canteen detail: ' + req.params.id); 
-}; 
- 
+exports.canteen_detail = async function (req, res) {
+    console.log("detail" + req.params.id)
+    try {
+        result = await Canteen.findById(req.params.id)
+        res.send(result)
+    } catch (error) {
+        res.status(500)
+        res.send(`{"error": document for id ${req.params.id} not found`);
+    }
+};
+
 // Handle Canteen create on POST. 
-exports.canteen_create_post =async function(req, res) { 
+exports.canteen_create_post = async function (req, res) {
     console.log(req.body)
     let document = new Canteen();
     // We are looking for a body, since POST does not have query parameters.
@@ -28,17 +36,32 @@ exports.canteen_create_post =async function(req, res) {
         res.status(500);
         res.send(`{"error": ${err}}`);
     }
-}; 
- 
+};
+
 // Handle Canteen delete form on DELETE. 
-exports.canteen_delete = function(req, res) { 
-    res.send('NOT IMPLEMENTED: Canteen delete DELETE ' + req.params.id); 
-}; 
- 
+exports.canteen_delete = function (req, res) {
+    res.send('NOT IMPLEMENTED: Canteen delete DELETE ' + req.params.id);
+};
+
 // Handle Canteen update form on PUT. 
-exports.canteen_update_put = function(req, res) { 
-    res.send('NOT IMPLEMENTED: Canteen update PUT' + req.params.id); 
-}; 
+exports.canteen_update_put = async function (req, res) {
+    console.log(`update on id ${req.params.id} with body ${JSON.stringify(req.body)}`)
+    try {
+        let toUpdate = await Canteen.findById(req.params.id)
+        // Do updates of properties 
+        if (req.body.Item_name)
+            toUpdate.Item_name = req.body.Item_name;
+        if (req.body.Item_type) toUpdate.Item_type = req.body.Item_type;
+        if (req.body.Item_price) toUpdate.Item_price = req.body.Item_price;
+        let result = await toUpdate.save();
+        console.log("Sucess " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": ${err}: Update for id ${req.params.id} 
+failed`);
+    }
+};
 
 // List of all Canteens
 exports.canteen_list = async function (req, res) {
