@@ -17,4 +17,8 @@ router.put('/resource/canteen/:id', canteen_controller.canteen_update_put);
 router.get('/resource/canteen/:id', canteen_controller.canteen_detail);
 // GET request for list of all canteen items.
 router.get('/resource/canteen', canteen_controller.canteen_list);
+// GET detail canteen page.
+router.get('/canteen/detail', canteen_controller.costume_view_one_Page); 
+/* GET create cantenn page */ 
+router.get('/canteen/create', canteen_controller.costume_create_Page); 
 module.exports = router;
