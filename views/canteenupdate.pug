@@ -1,0 +1,42 @@
+extends layout 
+ 
+block content 
+  h1= title 
+  - let canteenid = toShow._id 
+  - let Item_name = toShow.Item_name 
+  - let Item_type = toShow.Item_type 
+  - let Item_price = toShow.Item_price 
+
+  div.row(class='mb-2') 
+    div.mr-1 ID is 
+    div #{canteenid}  
+  - let actionid = "/resource/canteen/" + canteenid 
+  form(id='CanteenForm', action=actionid, method="PUT") 
+    div.form-group 
+        label.canteenAttr(for='Item_name') Item Name 
+        input#Item_name(type='text', name='Item_name',value = toShow.Item_name)
+    div.form-group 
+        label.canteenAttr(for='Item_type') Item Type 
+        input#Item_type(type='text', name='Item_type',value = toShow.Item_type ) 
+    div.form-group 
+        label.canteenAttr(for='Item_price') Item Price 
+        input#Item_price(type='number', name='Item_price',value = toShow.Item_price) 
+    input(type="submit") 
+ 
+  script. 
+    document.forms['CanteenForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'PUT', 
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Update succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Save failed " + error ) 
+      }); 
+    }); 
