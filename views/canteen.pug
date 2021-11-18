@@ -10,10 +10,19 @@ block content
                 td Item name 
                 td Item Type 
                 td Item Price 
-        tbody 
-            each item in items 
+                td Update
+        tbody
+            
+            each item in items
+                -let itemid=item._id
                 tr
                     td #{item._id}
                     td #{item.Item_name}
                     td #{item.Item_type}
                     td #{item.Item_price}
+                    td 
+                      button.btn( class="btn-primary ml-1", onclick= `dispatch(\"/canteen/update/?id=${item._id}\")` ) Update 
+                script. 
+                  function dispatch(path){ 
+                    window.location.href=path 
+                  } 
