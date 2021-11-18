@@ -9,9 +9,11 @@ router.get('/canteen/:id', canteen_controlers.canteen_detail);
 
 // GET detail canteen page.
 router.get('/detail', canteen_controlers.canteen_view_one_Page); 
-/* GET create cantenn page */ 
+/* GET create canteen page */ 
 router.get('/create', canteen_controlers.canteen_create_Page);
 /* GET create update page */ 
-router.get('/update', canteen_controlers.canteen_update_Page); 
+router.get('/update', canteen_controlers.canteen_update_Page);
+/* GET delete canteen page */ 
+router.get('/delete', canteen_controlers.canteen_delete_Page);  
 module.exports = router;
 

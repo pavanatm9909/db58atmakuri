@@ -1,13 +1,16 @@
-extends layout 
- 
-block content 
-  h1= title 
- 
-  - let canteenid = toShow._id 
-  - let Item_name = toShow.Item_name 
-  - let Item_type = toShow.Item_type 
-  - let Item_price = toShow.Item_price 
-  div 
+extends layout
+
+block content
+ h1= title
+
+  if(toShow == null)
+    h2 No instance to detail
+  else
+    - let canteenid = toShow._id 
+    - let Item_name = toShow.Item_name 
+    - let Item_type = toShow.Item_type 
+    - let Item_price = toShow.Item_price
+    div 
     div.row 
       div(class='canteenAttr mr-3') Canteen ID is: 
       div #{canteenid} 
@@ -20,4 +23,3 @@ block content
     div.row 
       div(class='canteenAttr mr-3') Item Price is: 
       div #{Item_price} 
-    
