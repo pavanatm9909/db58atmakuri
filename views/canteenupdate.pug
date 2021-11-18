@@ -3,7 +3,7 @@ extends layout
 block content
     h1= title
     if(toShow == null)
-        h2 No instance to detail
+        h2 No instance to update
     else
         - let canteenid = toShow._id 
         - let Item_name = toShow.Item_name 
@@ -17,13 +17,13 @@ block content
         form(id='CanteenForm', action=actionid, method="PUT") 
             div.form-group 
                 label.canteenAttr(for='Item_name') Item Name 
-                input#Item_name(type='text', name='Item_name',value = toShow.Item_name)
+                input#Item_name(type='text', name='Item_name',value = Item_name)
             div.form-group 
                 label.canteenAttr(for='Item_type') Item Type 
                 input#Item_type(type='text', name='Item_type',value = toShow.Item_type ) 
             div.form-group 
                 label.canteenAttr(for='Item_price') Item Price 
-                input#Item_price(type='number', name='Item_price',value = toShow.Item_price) 
+                input#Item_price(type='number', name='Item_price',value = Item_price) 
             input(type="submit") 
         
         script. 
