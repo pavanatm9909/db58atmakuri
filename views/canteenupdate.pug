@@ -23,7 +23,8 @@ block content
                 input#Item_type(type='text', name='Item_type',value = toShow.Item_type ) 
             div.form-group 
                 label.canteenAttr(for='Item_price') Item Price 
-                input#Item_price(type='number', name='Item_price',value = Item_price) 
+                input#Item_price(type='number', name='Item_price',value = Item_price,min= "0.01",max="12.99") 
+                span.validity
             input(type="submit") 
         
         script. 

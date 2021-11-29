@@ -3,8 +3,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var mongoose = require('mongoose');
-var Canteen = require("./models/canteen");
 
 var passport = require('passport'); 
 var LocalStrategy = require('passport-local').Strategy;
@@ -23,6 +21,8 @@ passport.use(new LocalStrategy(
     }); 
   }));
 
+var mongoose = require('mongoose');
+var Canteen = require("./models/canteen");
 
 const connectionString = process.env.MONGO_CON
 mongoose = require('mongoose');
@@ -89,6 +89,13 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(require('express-session')({ 
+  secret: 'keyboard cat', 
+  resave: false, 
+  saveUninitialized: false 
+})); 
+app.use(passport.initialize()); 
+app.use(passport.session()); 
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
@@ -97,13 +104,7 @@ app.use('/canteen', canteenRouter);
 app.use('/addmods', addmodsRouter);
 app.use('/selector', selectorRouter);
 app.use('/', resourceRouter);
-app.use(require('express-session')({ 
-  secret: 'keyboard cat', 
-  resave: false, 
-  saveUninitialized: false 
-})); 
-app.use(passport.initialize()); 
-app.use(passport.session()); 
+
  
 // passport config 
 // Use the existing connection 
