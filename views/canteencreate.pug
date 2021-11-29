@@ -6,7 +6,7 @@ block content
   form(id='CanteenForm', action="/resource/canteen", method="POST") 
     div.form-group 
         label.canteenAttr(for='Item_name') Item Name 
-        input#Item_name(type='text', name='Item_name') 
+        input#Item_name(type='text', name='Item_name', minlength="4", maxlength="8") 
     div.form-group 
         label.canteenAttr(for='Item_type') Item Type 
         input#Item_type(type='text', name='Item_type') 
